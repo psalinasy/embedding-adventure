@@ -31,7 +31,7 @@
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  html,body{height:100%}
   body{
     font-family:var(--font-body);
     color:var(--ink);
@@ -39,22 +39,22 @@
     background-image:radial-gradient(var(--line) 1.1px, transparent 1.1px);
     background-size:22px 22px;
     background-position:-11px -11px;
-    min-height:100vh;
+    height:100vh;
+    display:flex;flex-direction:column;
+    overflow:hidden;
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
   }
 
   /* ---------- header ---------- */
   .topbar{
+    flex:none;
     display:flex;align-items:center;justify-content:space-between;
     gap:16px;
-    padding:18px clamp(18px,5vw,48px);
-    border-bottom:1px solid var(--line);
-    background:rgba(247,250,253,.82);
-    backdrop-filter:blur(8px);
-    position:sticky;top:0;z-index:20;
+    padding:16px clamp(18px,5vw,40px);
   }
-  .brand{display:flex;align-items:center;gap:12px}
+  .brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;transition:opacity .16s ease}
+  .brand:hover{opacity:.72}
   .brand .mark{flex:none}
   .brand .wordmark{display:flex;flex-direction:column;line-height:1}
   .brand .wordmark b{
@@ -74,9 +74,11 @@
 
   /* ---------- layout ---------- */
   .stage{
-    max-width:760px;margin:0 auto;
-    padding:clamp(28px,6vw,64px) clamp(18px,5vw,32px) 88px;
+    flex:1;min-height:0;width:100%;max-width:760px;margin:0 auto;
+    padding:0 clamp(18px,5vw,32px);
+    display:flex;flex-direction:column;overflow-y:auto;
   }
+  .stage-inner{margin:auto 0;width:100%;padding:clamp(14px,3vw,32px) 0}
 
   /* ---------- dot trail (signature) ---------- */
   .trail{
@@ -256,28 +258,22 @@
   .btn-outline:hover{background:var(--blue-tint);border-color:var(--blue-deep);transform:translateY(-2px)}
 
   /* ---------- intro ---------- */
-  .intro{text-align:center;padding-top:clamp(10px,4vw,40px)}
-  .intro .constellation{margin:0 auto 30px;width:120px;height:120px}
+  .intro{text-align:center;padding-top:0}
+  .intro .constellation{margin:0 auto 24px;width:100px;height:100px}
   .intro h1{
     font-family:var(--font-display);font-weight:900;letter-spacing:-.03em;line-height:1.02;
     font-size:clamp(2.4rem,7vw,4rem);color:var(--ink);
   }
   .intro h1 em{font-style:normal;color:var(--blue)}
   .intro p{margin:20px auto 0;font-size:1.12rem;line-height:1.6;color:var(--slate);max-width:46ch}
-  .intro .legend{
-    display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;margin:28px auto 0;max-width:40ch;
-    font-family:var(--font-mono);font-size:.74rem;letter-spacing:.03em;color:var(--slate-soft);
-  }
-  .intro .legend span{display:inline-flex;align-items:center;gap:7px}
-  .intro .legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
   .intro .start{
-    margin-top:38px;display:inline-flex;align-items:center;gap:11px;
+    margin-top:28px;display:inline-flex;align-items:center;gap:11px;
     background:var(--blue);color:#fff;border:none;cursor:pointer;
     font-family:var(--font-display);font-weight:600;font-size:1.06rem;
     padding:16px 30px;border-radius:14px;
-    box-shadow:0 10px 28px rgba(80,158,227,.34);transition:all .18s ease;
+    transition:background-color .18s ease;
   }
-  .intro .start:hover{background:var(--blue-deep);transform:translateY(-3px);box-shadow:0 16px 36px rgba(80,158,227,.42)}
+  .intro .start:hover{background:var(--blue-deep)}
 
   /* ---------- optional permissions CTA (part 2) ---------- */
   .next-cta{
@@ -375,12 +371,11 @@
 
   /* ---------- footer ---------- */
   footer{
-    text-align:center;padding:30px 20px 46px;color:var(--slate-soft);
-    font-size:.84rem;line-height:1.6;
+    flex:none;text-align:center;padding:10px 20px 14px;color:var(--slate-soft);
+    font-size:.8rem;line-height:1.5;
   }
   footer a{color:var(--blue-deep);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
   footer a:hover{border-color:var(--blue-deep)}
-  footer .disclaim{margin-top:8px;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.04em;opacity:.8}
 
   @media (max-width:520px){
     .choice{grid-template-columns:auto 1fr;padding:16px}
@@ -394,9 +389,32 @@
 <body>
 
 <header class="topbar">
-  <div class="brand">
+  <a class="brand" href="https://www.metabase.com" target="_blank" rel="noopener" aria-label="Metabase — visit metabase.com">
+    <svg class="mark" width="30" height="27" viewBox="0 0 46 42" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="5" cy="10" r="3.4" fill="#509EE3"/>
+      <circle cx="5" cy="19" r="3.4" fill="#509EE3"/>
+      <circle cx="5" cy="28" r="3.4" fill="#509EE3"/>
+      <circle cx="5" cy="37" r="3.4" fill="#509EE3"/>
+      <circle cx="14" cy="10" r="3.4" fill="#BFDDF3"/>
+      <circle cx="14" cy="19" r="3.4" fill="#509EE3"/>
+      <circle cx="14" cy="28" r="3.4" fill="#BFDDF3"/>
+      <circle cx="14" cy="37" r="3.4" fill="#BFDDF3"/>
+      <circle cx="23" cy="1" r="2.6" fill="#BFDDF3"/>
+      <circle cx="23" cy="10" r="3.4" fill="#509EE3"/>
+      <circle cx="23" cy="19" r="3.4" fill="#BFDDF3"/>
+      <circle cx="23" cy="28" r="3.4" fill="#509EE3"/>
+      <circle cx="23" cy="37" r="3.4" fill="#BFDDF3"/>
+      <circle cx="32" cy="10" r="3.4" fill="#BFDDF3"/>
+      <circle cx="32" cy="19" r="3.4" fill="#509EE3"/>
+      <circle cx="32" cy="28" r="3.4" fill="#BFDDF3"/>
+      <circle cx="32" cy="37" r="3.4" fill="#509EE3"/>
+      <circle cx="41" cy="10" r="3.4" fill="#509EE3"/>
+      <circle cx="41" cy="19" r="3.4" fill="#509EE3"/>
+      <circle cx="41" cy="28" r="3.4" fill="#509EE3"/>
+      <circle cx="41" cy="37" r="3.4" fill="#509EE3"/>
+    </svg>
     <span class="wordmark"><b>Metabase</b><span>Embedding Adventure</span></span>
-  </div>
+  </a>
   <button class="restart" id="restartBtn" hidden onclick="restart()">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
     Start over
@@ -404,15 +422,16 @@
 </header>
 
 <main class="stage">
-  <div class="trail" id="trail" hidden></div>
-  <div id="scene"></div>
+  <div class="stage-inner">
+    <div class="trail" id="trail" hidden></div>
+    <div id="scene"></div>
+  </div>
 </main>
 
 <footer>
   A friendly walk-through for choosing how to embed Metabase in your product.<br>
   Dig deeper in the <a href="https://www.metabase.com/learn/metabase-basics/embedding/overview" target="_blank" rel="noopener">embedding guides</a>
   or the <a href="https://www.metabase.com/product/embedded-analytics" target="_blank" rel="noopener">embedded analytics overview</a>.
-  <div class="disclaim">Unofficial interactive companion · Metabase brand colors used for illustration</div>
 </footer>
 
 <script>
@@ -714,15 +733,9 @@ function renderIntro(){
       <circle cx="60" cy="60" r="6.5" fill="#2D7CC4"/>
     </svg>
     <h1>Choose your <em>embedding</em> adventure</h1>
-    <p>A few quick questions stand between you and the right way to put Metabase in front of your customers. Follow the trail of dots to land on an embedding strategy — then, if you like, branch into an optional second journey to work out the permissions and data-isolation strategy to pair with it.</p>
-    <div class="legend">
-      <span><i style="background:#509EE3"></i>Guest</span>
-      <span><i style="background:#509EE3"></i>Modular SSO</span>
-      <span><i style="background:#A989C5"></i>Modular SDK</span>
-      <span><i style="background:#88BF4D"></i>Full app</span>
-    </div>
+    <p>Answer a few quick questions to find the right way to embed Metabase in your product. Then we'll guide you through choosing the right permissions and data isolation strategy.</p>
     <button class="start" onclick="go('capabilities','intro')">
-      Begin the journey
+      Get started
       ${ICONS.arrow}
     </button>`;
   sceneEl.appendChild(el);
