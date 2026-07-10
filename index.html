@@ -16,7 +16,7 @@
     --ink:#1B2733;
     --slate:#4C5773;
     --slate-soft:#7A8499;
-    --paper:#F7FAFD;
+    --paper:#F9FAFB;
     --card:#FFFFFF;
     --line:#E1E8F0;
     --green:#88BF4D;
@@ -36,9 +36,6 @@
     font-family:var(--font-body);
     color:var(--ink);
     background-color:var(--paper);
-    background-image:radial-gradient(var(--line) 1.1px, transparent 1.1px);
-    background-size:22px 22px;
-    background-position:-11px -11px;
     height:100vh;
     display:flex;flex-direction:column;
     overflow:hidden;
@@ -252,7 +249,11 @@
 
   /* ---------- intro ---------- */
   .intro{text-align:center;padding-top:0}
-  .intro .constellation{margin:0 auto 24px;width:100px;height:100px}
+  .intro .hero-illo{
+    display:block;margin:0 auto 20px;width:min(340px,74vw);height:auto;
+    will-change:transform;transition:transform .6s cubic-bezier(.2,.8,.25,1);
+  }
+  .intro .hero-illo:hover{transform:translateY(-10px) scale(1.035)}
   .intro h1{
     font-family:var(--font-display);font-weight:900;letter-spacing:-.03em;line-height:1.02;
     font-size:clamp(2.4rem,7vw,4rem);color:var(--ink);
@@ -430,7 +431,6 @@
 </main>
 
 <footer>
-  A friendly walk-through for choosing how to embed Metabase in your product.<br>
   Dig deeper in the <a href="https://www.metabase.com/learn/metabase-basics/embedding/overview" target="_blank" rel="noopener">embedding guides</a>
   or the <a href="https://www.metabase.com/product/embedded-analytics" target="_blank" rel="noopener">embedded analytics overview</a>.
 </footer>
@@ -715,24 +715,7 @@ function renderIntro(){
   const el = document.createElement('section');
   el.className = 'scene intro';
   el.innerHTML = `
-    <svg class="constellation" viewBox="0 0 120 120" aria-hidden="true">
-      <line x1="60" y1="22" x2="96" y2="42" stroke="#509EE3" stroke-width="1.5" opacity=".3"/>
-      <line x1="96" y1="42" x2="92" y2="82" stroke="#509EE3" stroke-width="1.5" opacity=".3"/>
-      <line x1="92" y1="82" x2="60" y2="100" stroke="#509EE3" stroke-width="1.5" opacity=".3"/>
-      <line x1="60" y1="100" x2="24" y2="82" stroke="#509EE3" stroke-width="1.5" opacity=".3"/>
-      <line x1="24" y1="82" x2="22" y2="42" stroke="#509EE3" stroke-width="1.5" opacity=".3"/>
-      <line x1="22" y1="42" x2="60" y2="22" stroke="#509EE3" stroke-width="1.5" opacity=".3"/>
-      <line x1="60" y1="22" x2="60" y2="60" stroke="#509EE3" stroke-width="1.5" opacity=".2"/>
-      <line x1="92" y1="82" x2="60" y2="60" stroke="#509EE3" stroke-width="1.5" opacity=".2"/>
-      <line x1="24" y1="82" x2="60" y2="60" stroke="#509EE3" stroke-width="1.5" opacity=".2"/>
-      <circle cx="60" cy="22" r="5.5" fill="#509EE3"/>
-      <circle cx="96" cy="42" r="4.5" fill="#A989C5"/>
-      <circle cx="92" cy="82" r="5.5" fill="#509EE3"/>
-      <circle cx="60" cy="100" r="4.5" fill="#88BF4D"/>
-      <circle cx="24" cy="82" r="5.5" fill="#509EE3"/>
-      <circle cx="22" cy="42" r="4.5" fill="#F2C038"/>
-      <circle cx="60" cy="60" r="6.5" fill="#2D7CC4"/>
-    </svg>
+    <img class="hero-illo" src="embedding-hero.svg" alt="" aria-hidden="true">
     <h1>Choose your <em>embedding</em> adventure</h1>
     <p>Answer a few quick questions to find the right way to embed Metabase in your product. Then we'll guide you through choosing the right permissions and data isolation strategy.</p>
     <button class="start" onclick="go('capabilities','intro')">
