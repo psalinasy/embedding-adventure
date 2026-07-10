@@ -151,6 +151,7 @@
     display:block;font-family:var(--font-display);font-weight:600;font-size:1.08rem;letter-spacing:-.01em;color:var(--ink);
   }
   .choice .body span{display:block;margin-top:4px;font-size:.92rem;line-height:1.45;color:var(--slate)}
+  .choice .body .req{margin-top:6px;font-family:var(--font-mono);font-size:.72rem;font-weight:700;letter-spacing:.02em;color:var(--blue-deep)}
   .choice .arrow{color:var(--slate-soft);transition:transform .16s ease,color .16s ease;flex:none}
   .choice:hover .arrow,.choice:focus-visible .arrow{transform:translateX(3px);color:var(--blue-deep)}
 
@@ -506,62 +507,54 @@ const NODES = {
   /* ---------------- chapter 1 : capabilities ---------------- */
   capabilities:{
     type:'question', chapter:"Chapter 1 · The powers",
-    title:"What should your customers be able to do?",
+    title:"What should customers be able to do?",
     sub:"This is the fork in the road — it sets the whole shape of your embed.",
     choices:[
-      {b:"View only, with filters", s:"They read dashboards and adjust filters. No drilling, no authoring.", to:'view_theme'},
-      {b:"Drill through, no create", s:"They explore the 'why' behind a chart, but can't build new content.", to:'drill_framework'},
-      {b:"Create their own reports", s:"Full self-serve — they build their own questions and dashboards, with or without AI.", to:'create_framework'}
-    ]
-  },
-
-  /* ================= VIEW-ONLY branch ================= */
-  view_theme:{
-    type:'question', chapter:"Chapter 2 · The look",
-    title:"Whitelabeling, or more control over the theme?",
-    sub:"View-only embeds are the lightest-weight option. How far does the styling need to go?",
-    choices:[
-      {b:"Whitelabeling is enough", s:"Swap logos and colors with the appearance settings — that covers it.", to:'r_guest'},
-      {b:"I need more theme control", s:"Finer styling than the appearance feature alone can give.", to:'r_sso_view'}
+      {b:"View only, with filters", s:"They read dashboards and adjust filters. No drilling, no authoring.", to:'view_depth'},
+      {b:"Drill through, no create", s:"They explore the 'why' behind a chart, but can't build new content.", to:'drill_depth'},
+      {b:"Create their own reports", s:"Full self-serve — they build their own questions and dashboards, with or without AI.", to:'create_scope'}
     ]
   },
 
   /* ================= DRILL-THROUGH branch ================= */
-  drill_framework:{
-    type:'question', chapter:"Chapter 2 · The stack",
-    title:"What framework is your frontend built on?",
-    sub:"Heads up: Modular Embedding SSO works in any app that can host an iframe — so this is mostly about how deep you want to integrate.",
-    choices:[
-      {b:"Built on React", s:"Our frontend is a React application.", to:'drill_custom'},
-      {b:"Not React", s:"A different framework — but it can embed an iframe.", to:'r_sso_drill'}
-    ]
-  },
-  drill_custom:{
-    type:'question', chapter:"Chapter 3 · The integration",
+  drill_depth:{
+    type:'question', chapter:"Chapter 2 · The integration",
     title:"How deep does the integration go?",
-    sub:"You're on React, so the SDK is on the table. Do you actually need it?",
+    sub:"Heads up: Modular Embedding SSO works in any app that can host an iframe — so this is really about how deep you want to build.",
     choices:[
-      {b:"An iframe is fine", s:"Whitelabeling and/or CSS theming covers us. No custom component behavior.", to:'r_sso_drill'},
-      {b:"Custom functionality / workflow", s:"Build custom behavior on the embedded components, or wire the embed into my core app's workflows.", to:'r_sdk_drill'}
+      {b:"Deeply integrated", s:"We build it into our own UI.", req:"*Requires a React frontend", to:'r_sdk_drill'},
+      {b:"Drop it in, styled to our brand", s:"An iframe with whitelabeling / CSS theming covers us — no custom build.", to:'r_sso_drill'}
     ]
   },
 
   /* ================= CREATE branch ================= */
-  create_framework:{
-    type:'question', chapter:"Chapter 2 · The stack",
-    title:"What framework is your frontend built on?",
-    sub:"Self-serve means handing customers Metabase's query builder — and Metabot AI, if you want it. The question is how tightly it's woven in.",
+  create_scope:{
+    type:'question', chapter:"Chapter 2 · The scope",
+    title:"How much Metabase — pieces or the whole app?",
+    sub:"Self-serve means handing customers Metabase's query builder — and Metabot AI, if you want it. Are you embedding the whole app, or just the pieces?",
     choices:[
-      {b:"Built on React", s:"Our frontend is a React application.", to:'create_custom'},
-      {b:"Not React", s:"A different framework, but it can host an iframe.", to:'r_fullapp'}
+      {b:"Whole app", s:"The complete Metabase experience, embedded and themed as your own.", to:'r_fullapp'},
+      {b:"Pieces", s:"Embed individual dashboards, charts, or the query builder — not the whole app.", to:'create_depth'}
     ]
   },
-  create_custom:{
+  create_depth:{
     type:'question', chapter:"Chapter 3 · The integration",
-    title:"Do you need custom components or workflow hooks?",
+    title:"How deep does the integration go?",
+    sub:"You're embedding pieces of Metabase. How tightly do they need to weave into your product?",
     choices:[
-      {b:"An iframe is fine", s:"We want the full Metabase experience embedded and themed to match.", to:'r_fullapp'},
-      {b:"Custom components / workflows", s:"Build bespoke UI on the embedded pieces, or connect them to my app's workflows.", to:'r_sdk_create'}
+      {b:"Deeply integrated", s:"We build it into our own UI.", req:"*Requires a React frontend", to:'r_sdk_create'},
+      {b:"Drop it in, styled to our brand", s:"An iframe with whitelabeling / CSS theming covers us — no custom build.", to:'r_sso_create'}
+    ]
+  },
+
+  /* ================= VIEW-ONLY branch ================= */
+  view_depth:{
+    type:'question', chapter:"Chapter 2 · The integration",
+    title:"How deep does the integration go?",
+    sub:"View-only embeds are the lightest-weight option. How far into your product do they need to reach?",
+    choices:[
+      {b:"Deeply integrated", s:"We build it into our own UI.", req:"*Requires a React frontend", to:'r_sdk_view'},
+      {b:"Drop it in, styled to our brand", s:"An iframe with whitelabeling / CSS theming covers us — no custom build.", to:'r_guest'}
     ]
   },
 
@@ -576,17 +569,6 @@ const NODES = {
     ],
     note:"Because the <b>Locked parameter isn't a paid feature</b>, this is often the most cost-effective place to start.",
     arch:'locked'
-  },
-  r_sso_view:{
-    type:'result', verdict:"Modular Embedding SSO",
-    tagline:"Single sign-on embeds, with room to style well beyond whitelabeling.",
-    why:[
-      "You need finer theme control than the appearance settings give you.",
-      "SSO supports CSS customization/theming for fine-grained control over the look.",
-      "It still drops into any iframe-compatible app."
-    ],
-    note:SSO_NOTE,
-    arch:'rls'
   },
   r_sso_drill:{
     type:'result', verdict:"Modular Embedding SSO",
@@ -630,6 +612,28 @@ const NODES = {
       "It's the most flexible path — bespoke UI plus full authoring."
     ],
     note:"The SDK is the way to go when you want self-serve power and a fully custom React surface.",
+    arch:'rls'
+  },
+  r_sso_create:{
+    type:'result', verdict:"Modular Embedding SSO",
+    tagline:"Self-serve on embedded Metabase pieces, dropped into an iframe with SSO.",
+    why:[
+      "Customers build their own reports, but you're embedding pieces — not the whole app.",
+      "An iframe meets your needs — no custom build or React-specific components required.",
+      "Reach for CSS customization/theming whenever you want finer control over the theme."
+    ],
+    note:SSO_NOTE,
+    arch:'rls'
+  },
+  r_sdk_view:{
+    type:'result', verdict:"Modular Embedding SDK",
+    tagline:"React-native embeds you can bend to fit your product.",
+    why:[
+      "Your frontend is built on React.",
+      "Customers view and filter dashboards, and you're building the embed deeply into your own UI.",
+      "The SDK gives the deepest, most native integration."
+    ],
+    note:"Choose the SDK when an iframe simply can't reach far enough into your product.",
     arch:'rls'
   },
 
@@ -734,7 +738,7 @@ function renderQuestion(id,n){
     return `
     <button class="choice" onclick="${handler}">
       <span class="dot"></span>
-      <span class="body"><b>${c.b}</b><span>${c.s}</span></span>
+      <span class="body"><b>${c.b}</b><span>${c.s}</span>${c.req?`<span class="req">${c.req}</span>`:''}</span>
       ${ICONS.arrow}
     </button>`;
   }).join('');
@@ -875,9 +879,9 @@ function demoSection(verdict){
 
 function capabilityLabel(){
   // derive a friendly label from history for the result subtitle
-  if(history.includes('view_theme')) return 'View only';
-  if(history.includes('drill_framework')) return 'Drill-through';
-  if(history.includes('create_framework')) return 'Self-serve';
+  if(history.includes('view_depth')) return 'View only';
+  if(history.includes('drill_depth')) return 'Drill-through';
+  if(history.includes('create_scope')) return 'Self-serve';
   return 'Embedding';
 }
 
