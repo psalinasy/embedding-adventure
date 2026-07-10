@@ -36,9 +36,8 @@
     font-family:var(--font-body);
     color:var(--ink);
     background-color:var(--paper);
-    height:100vh;
+    min-height:100vh;
     display:flex;flex-direction:column;
-    overflow:hidden;
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
   }
@@ -66,17 +65,19 @@
   .stage{
     flex:1;min-height:0;width:100%;max-width:760px;margin:0 auto;
     padding:0 clamp(18px,5vw,32px);
-    display:flex;flex-direction:column;overflow-y:auto;
+    display:flex;flex-direction:column;
+    transition:max-width .25s ease;
   }
-  .stage-inner{margin:auto 0;width:100%;padding:clamp(14px,3vw,32px) 0}
+  .stage.wide{max-width:1040px}
+  .stage-inner{margin:0 0 auto;width:100%;padding:clamp(10px,2vw,20px) 0 clamp(14px,3vw,32px)}
 
   /* ---------- dot trail (signature) ---------- */
   .trail{
-    display:flex;align-items:center;gap:0;
+    display:flex;flex-direction:column;align-items:center;gap:12px;
     min-height:30px;margin-bottom:34px;
-    flex-wrap:wrap;
   }
   .trail[hidden]{display:none}
+  .trail .dots-row{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center}
   .trail .seg{display:flex;align-items:center}
   .trail .link{
     width:26px;height:2px;background:var(--blue);opacity:.32;border-radius:2px;
@@ -107,7 +108,6 @@
     font-family:var(--font-mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
     color:var(--blue-deep);display:flex;align-items:center;gap:9px;margin-bottom:16px;
   }
-  .eyebrow::before{content:"";width:20px;height:1.5px;background:var(--blue);display:inline-block;border-radius:2px}
 
   h1.q{
     font-family:var(--font-display);font-weight:700;letter-spacing:-.02em;line-height:1.08;
@@ -130,7 +130,7 @@
     transform:scaleY(0);transform-origin:top;transition:transform .2s ease;
   }
   .choice:hover,.choice:focus-visible{
-    transform:translateY(-2px);border-color:var(--blue);box-shadow:var(--shadow-lift);outline:none;
+    border-color:var(--blue);outline:none;
   }
   .choice:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
   .choice:hover::before,.choice:focus-visible::before{transform:scaleY(1)}
@@ -148,11 +148,12 @@
 
   .backrow{margin-top:26px}
   .back{
-    font-family:var(--font-mono);font-size:.74rem;letter-spacing:.04em;color:var(--slate-soft);
-    background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:6px 2px;
-    transition:color .16s ease;
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--card);color:var(--slate);border:1px solid var(--line);cursor:pointer;
+    font-family:var(--font-display);font-weight:700;font-size:.94rem;
+    padding:13px 20px;border-radius:12px;transition:all .16s ease;
   }
-  .back:hover{color:var(--blue-deep)}
+  .back:hover{border-color:var(--blue);color:var(--blue-deep)}
   .back[hidden]{display:none}
 
   /* ---------- result ---------- */
@@ -171,15 +172,27 @@
   }
   .tagline{margin-top:14px;font-size:1.12rem;line-height:1.5;color:var(--slate);max-width:50ch}
 
-  .panel{
+  /* split hero panel: verdict on the left, why-it-fits on the right */
+  .result-panel{
+    display:grid;grid-template-columns:minmax(220px,320px) 1fr;
     background:var(--card);border:1px solid var(--line);border-radius:18px;
     box-shadow:var(--shadow);margin-top:28px;overflow:hidden;
   }
-  .panel .phead{
-    padding:18px 22px 6px;
+  .result-panel .rp-verdict{
+    background:var(--blue);color:#fff;padding:32px 28px;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .result-panel .rp-verdict .verdict-tag{color:rgba(255,255,255,.92)}
+  .result-panel .rp-verdict .verdict-tag .check{background:rgba(255,255,255,.24)}
+  .result-panel .rp-verdict h1.verdict{color:#fff;font-size:clamp(1.7rem,4.4vw,2.35rem)}
+  .result-panel .rp-verdict .tagline{color:rgba(255,255,255,.88);max-width:none}
+  .result-panel.part2 .rp-verdict{background:var(--purple)}
+  .result-panel .rp-body{padding:26px 26px 22px}
+  .result-panel .phead{
+    padding:0 0 12px;
     font-family:var(--font-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-deep);
   }
-  .why{list-style:none;padding:8px 22px 20px;display:flex;flex-direction:column;gap:14px}
+  .why{list-style:none;display:flex;flex-direction:column;gap:14px}
   .why li{display:grid;grid-template-columns:auto 1fr;gap:13px;align-items:start;font-size:1rem;line-height:1.5;color:var(--ink)}
   .why li .mb-dot{margin-top:7px;width:9px;height:9px;border-radius:50%;background:var(--blue);flex:none;box-shadow:0 0 0 3px var(--blue-tint)}
 
@@ -191,6 +204,14 @@
   }
   .note .ic{flex:none;margin-top:1px}
   .note b{color:var(--ink);font-family:var(--font-body);font-weight:900}
+  .doc-link.on-fill{
+    color:#fff;margin-left:0;margin-top:20px;
+  }
+  .doc-link.on-fill:hover{color:rgba(255,255,255,.85)}
+  @media (max-width:720px){
+    .result-panel{grid-template-columns:1fr}
+    .result-panel .rp-verdict{padding:26px 24px}
+  }
 
   /* data architecture accordion */
   .accordion{margin-top:16px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:var(--shadow);overflow:hidden}
@@ -222,7 +243,7 @@
   .arch-note b{color:#604e15}
 
   /* result actions */
-  .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;align-items:center}
+  .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;align-items:center;justify-content:space-between}
   .btn-primary{
     display:inline-flex;align-items:center;gap:9px;
     background:var(--blue);color:#fff;border:none;cursor:pointer;
@@ -270,15 +291,17 @@
 
   /* ---------- optional permissions CTA (part 2) ---------- */
   .next-cta{
-    margin-top:20px;padding:24px;border-radius:18px;
+    margin-top:20px;padding:22px 26px;border-radius:18px;
     background:linear-gradient(180deg,#FBF8FE 0%,#F6F1FB 100%);
     border:1px solid #E5D8F1;box-shadow:var(--shadow);
+    display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
   }
   .next-cta .k{
     font-family:var(--font-mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
     color:#8A5FB5;display:flex;align-items:center;gap:9px;margin-bottom:12px;
   }
   .next-cta .k::before{content:"";width:18px;height:1.5px;background:var(--purple);border-radius:2px}
+  .next-cta .nc-body{flex:1;min-width:240px}
   .next-cta h3{
     font-family:var(--font-display);font-weight:900;font-size:1.32rem;letter-spacing:-.02em;color:var(--ink);
     display:flex;align-items:center;gap:11px;line-height:1.15;
@@ -286,28 +309,29 @@
   .next-cta h3 svg{flex:none;stroke:#8A5FB5}
   .next-cta p{margin-top:11px;font-size:.98rem;line-height:1.55;color:var(--slate);max-width:56ch}
   .btn-purple{
-    display:inline-flex;align-items:center;gap:9px;
+    display:inline-flex;align-items:center;gap:9px;flex:none;
     background:var(--purple);color:#fff;border:none;cursor:pointer;text-decoration:none;
     font-family:var(--font-display);font-weight:700;font-size:.96rem;
     padding:13px 22px;border-radius:12px;
     transition:background-color .16s ease;
   }
-  .next-cta .btn-purple{margin-top:18px}
+  .next-cta .btn-purple{margin-top:0}
   .btn-purple:hover{background:#9774BA}
 
   /* part-2 (permissions) result accents */
   .verdict-tag.part2{color:#8A5FB5}
   .verdict-tag.part2 .check{background:var(--purple)}
-  .panel.part2{border-color:#E5D8F1}
-  .panel.part2 .phead{color:#8A5FB5}
+  .result-panel.part2{border-color:#E5D8F1}
+  .result-panel.part2 .phead{color:#8A5FB5}
   .why li .mb-dot.purple{background:var(--purple);box-shadow:0 0 0 3px #F1E9F8}
   .note.part2{background:#F6F1FB;border-color:#E5D8F1;color:var(--slate)}
   .note.part2 .ic{stroke:#8A5FB5}
 
+
   /* trail label + part-2 dots */
   .trail-label{
     font-family:var(--font-mono);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;
-    color:var(--slate-soft);margin-right:14px;padding:4px 10px;border-radius:999px;
+    color:var(--slate-soft);padding:4px 10px;border-radius:999px;
     background:var(--blue-tint);color:var(--blue-deep);white-space:nowrap;
   }
   .trail-label.p2{background:#F1E9F8;color:#8A5FB5}
@@ -364,8 +388,8 @@
 
   /* ---------- footer ---------- */
   footer{
-    flex:none;text-align:center;padding:10px 20px 14px;color:var(--slate-soft);
-    font-size:.8rem;line-height:1.5;
+    flex:none;margin-top:auto;text-align:center;padding:24px 20px 18px;color:var(--slate-soft);
+    font-size:.8rem;line-height:1.5;width:100%;
   }
   footer a{color:var(--blue-deep);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
   footer a:hover{border-color:var(--blue-deep)}
@@ -382,7 +406,7 @@
 
 <header class="topbar">
   <a class="brand" href="https://www.metabase.com" target="_blank" rel="noopener" aria-label="Metabase — visit metabase.com">
-    <svg class="mark" width="105" height="26" viewBox="0 0 1035 256" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <svg class="mark" width="130" height="32" viewBox="0 0 1035 256" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M430.799 63.8732V193.797H407.079V114.016C407.079 112.345 407.109 110.554 407.168 108.644C407.288 106.734 407.467 104.793 407.705 102.824L370.558 173.292C368.529 177.172 365.396 179.113 361.16 179.113H357.4C355.311 179.113 353.462 178.635 351.85 177.68C350.239 176.665 348.956 175.203 348.001 173.292L310.675 102.555C310.854 104.644 311.003 106.674 311.123 108.644C311.242 110.554 311.302 112.345 311.302 114.016V193.797H287.581V63.8732H307.99C309.124 63.8732 310.138 63.9031 311.033 63.9628C311.928 64.0225 312.704 64.2015 313.361 64.5C314.077 64.7388 314.703 65.1567 315.24 65.7536C315.837 66.2908 316.404 67.0669 316.941 68.0817L353.283 137.386C354.416 139.476 355.461 141.625 356.415 143.833C357.43 146.042 358.385 148.31 359.28 150.638C360.175 148.251 361.1 145.923 362.055 143.654C363.069 141.386 364.143 139.207 365.277 137.118L401.35 68.0817C401.887 67.0669 402.454 66.2908 403.051 65.7536C403.647 65.1567 404.274 64.7388 404.93 64.5C405.647 64.2015 406.422 64.0225 407.258 63.9628C408.153 63.9031 409.197 63.8732 410.391 63.8732H430.799Z" fill="#5A6072"/>
       <path d="M506.624 136.76C506.624 134.193 506.266 131.745 505.549 129.417C504.893 127.089 503.819 125.03 502.327 123.239C500.835 121.448 498.955 120.045 496.688 119.031C494.42 117.956 491.705 117.419 488.542 117.419C482.635 117.419 478.01 119.09 474.668 122.433C471.326 125.776 469.148 130.551 468.134 136.76H506.624ZM467.776 151.444C468.551 160.1 470.998 166.428 475.116 170.427C479.293 174.427 484.723 176.426 491.407 176.426C494.808 176.426 497.732 176.038 500.179 175.262C502.685 174.427 504.863 173.531 506.713 172.576C508.623 171.561 510.323 170.666 511.815 169.89C513.367 169.054 514.888 168.636 516.38 168.636C518.29 168.636 519.782 169.353 520.856 170.785L528.017 179.739C525.391 182.784 522.497 185.321 519.334 187.35C516.171 189.32 512.889 190.902 509.488 192.096C506.087 193.23 502.655 194.006 499.194 194.424C495.733 194.902 492.391 195.14 489.169 195.14C482.724 195.14 476.697 194.096 471.088 192.006C465.538 189.857 460.675 186.724 456.497 182.605C452.38 178.426 449.128 173.263 446.741 167.114C444.354 160.966 443.16 153.832 443.16 145.714C443.16 139.446 444.175 133.536 446.204 127.985C448.292 122.433 451.276 117.598 455.155 113.479C459.033 109.36 463.748 106.107 469.297 103.719C474.847 101.272 481.113 100.048 488.095 100.048C494.003 100.048 499.433 101.003 504.386 102.913C509.398 104.764 513.695 107.48 517.275 111.061C520.916 114.643 523.72 119.06 525.689 124.313C527.718 129.507 528.733 135.446 528.733 142.132C528.733 143.983 528.643 145.505 528.464 146.699C528.285 147.893 527.987 148.848 527.569 149.564C527.151 150.28 526.585 150.788 525.868 151.086C525.152 151.325 524.227 151.444 523.094 151.444H467.776Z" fill="#5A6072"/>
       <path d="M571.3 195.23C567.122 195.23 563.423 194.633 560.2 193.439C556.978 192.186 554.263 190.425 552.055 188.156C549.847 185.888 548.176 183.142 547.042 179.918C545.908 176.695 545.341 173.054 545.341 168.994V119.21H536.659C535.346 119.21 534.212 118.792 533.257 117.956C532.362 117.12 531.915 115.867 531.915 114.195V104.525L546.684 101.839L551.697 77.9312C552.353 75.2449 554.173 73.9018 557.157 73.9018H570.046V102.018H593.856V119.21H570.046V167.383C570.046 169.949 570.643 171.979 571.837 173.471C573.09 174.964 574.85 175.71 577.118 175.71C578.311 175.71 579.326 175.591 580.161 175.352C580.997 175.053 581.713 174.755 582.31 174.456C582.906 174.098 583.443 173.8 583.921 173.561C584.458 173.263 584.995 173.113 585.532 173.113C586.248 173.113 586.845 173.292 587.322 173.651C587.8 173.949 588.277 174.486 588.754 175.262L596.184 187.082C592.782 189.768 588.933 191.798 584.637 193.17C580.34 194.543 575.895 195.23 571.3 195.23Z" fill="#5A6072"/>
@@ -450,7 +474,8 @@ const ICONS = {
   check:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
   bulb:'<svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D7CC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.1 14a5 5 0 1 0-6.2 0c.5.4 1.1 1.2 1.1 2h4c0-.8.6-1.6 1.1-2Z"/></svg>',
   db:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2D7CC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>',
-  chev:'<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>'
+  chev:'<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>',
+  doc:'<svg width="17" height="17" viewBox="0 0 443 443" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M55.375 62.2969C43.9066 62.2969 34.6094 71.5941 34.6094 83.0625V332.25C34.6094 343.718 43.9066 353.016 55.375 353.016H143.187C152.366 353.016 161.17 356.662 167.66 363.152L206.813 402.308C210.707 406.203 215.989 408.391 221.496 408.391C227.004 408.391 232.285 406.203 236.18 402.308L275.339 363.152C281.831 356.662 290.633 353.016 299.811 353.016H387.625C399.093 353.016 408.391 343.718 408.391 332.25V83.0625C408.391 71.5941 399.093 62.2969 387.625 62.2969H299.811C279.619 62.2969 260.252 70.3182 245.973 84.5964L221.498 109.07L197.028 84.5994C182.749 70.3193 163.381 62.2969 143.187 62.2969H55.375ZM76.1406 311.484V103.828H143.187C152.366 103.828 161.17 107.475 167.66 113.966L200.734 147.042V337.494L197.028 333.787C182.749 319.508 163.381 311.484 143.187 311.484H76.1406ZM242.266 337.491L245.973 333.784C260.252 319.505 279.619 311.484 299.811 311.484H366.859V103.828H299.811C290.633 103.828 281.831 107.474 275.339 113.964L242.266 147.036V337.491Z" fill="currentColor"/></svg>'
 };
 
 /* ---- permissions journey (part 2) data, keyed by embedding model + data layout ---- */
@@ -524,7 +549,7 @@ const NODES = {
 
   /* ---------------- chapter 1 : capabilities ---------------- */
   capabilities:{
-    type:'question', chapter:"Chapter 1 · User access",
+    type:'question', chapter:"User access",
     title:"What should customers be able to do?",
     sub:"Choose the level of access your customers need.",
     choices:[
@@ -536,18 +561,18 @@ const NODES = {
 
   /* ================= DRILL-THROUGH branch ================= */
   drill_depth:{
-    type:'question', chapter:"Chapter 2 · The integration",
+    type:'question', chapter:"The integration",
     title:"How deep does the integration go?",
     sub:"Decide whether analytics should sit inside your app or feel like part of it.",
     choices:[
-      {b:"Deeply integrated", s:"We build it into our own UI.", req:"*Requires a React frontend", to:'r_sdk_drill'},
-      {b:"Drop it in, styled to our brand", s:"An iframe with whitelabeling / CSS theming covers us — no custom build.", to:'r_sso_drill'}
+      {b:"Deeply integrated", s:"Build analytics into your own layout and workflows.", req:"*Requires a React frontend", to:'r_sdk_drill'},
+      {b:"Drop it in, styled to your brand", s:"Use a ready-made analytics view that matches your brand.", to:'r_sso_drill'}
     ]
   },
 
   /* ================= CREATE branch ================= */
   create_scope:{
-    type:'question', chapter:"Chapter 2 · The scope",
+    type:'question', chapter:"The scope",
     title:"How much Metabase — pieces or the whole app?",
     sub:"Give customers only the tools they need, or the full Metabase experience.",
     choices:[
@@ -556,23 +581,23 @@ const NODES = {
     ]
   },
   create_depth:{
-    type:'question', chapter:"Chapter 3 · The integration",
+    type:'question', chapter:"The integration",
     title:"How deep does the integration go?",
     sub:"You're embedding pieces of Metabase. How tightly do they need to weave into your product?",
     choices:[
-      {b:"Deeply integrated", s:"We build it into our own UI.", req:"*Requires a React frontend", to:'r_sdk_create'},
-      {b:"Drop it in, styled to our brand", s:"An iframe with whitelabeling / CSS theming covers us — no custom build.", to:'r_sso_create'}
+      {b:"Deeply integrated", s:"Build analytics into your own layout and workflows.", req:"*Requires a React frontend", to:'r_sdk_create'},
+      {b:"Drop it in, styled to your brand", s:"Use a ready-made analytics view that matches your brand.", to:'r_sso_create'}
     ]
   },
 
   /* ================= VIEW-ONLY branch ================= */
   view_depth:{
-    type:'question', chapter:"Chapter 2 · The integration",
+    type:'question', chapter:"The integration",
     title:"How deep does the integration go?",
     sub:"View-only embeds are the lightest-weight option. How far into your product do they need to reach?",
     choices:[
-      {b:"Deeply integrated", s:"We build it into our own UI.", req:"*Requires a React frontend", to:'r_sdk_view'},
-      {b:"Drop it in, styled to our brand", s:"An iframe with whitelabeling / CSS theming covers us — no custom build.", to:'r_guest'}
+      {b:"Deeply integrated", s:"Build analytics into your own layout and workflows.", req:"*Requires a React frontend", to:'r_sdk_view'},
+      {b:"Drop it in, styled to your brand", s:"Use a ready-made analytics view that matches your brand.", to:'r_guest'}
     ]
   },
 
@@ -697,6 +722,7 @@ function render(id){
   state.phase = id.indexOf('perm') === 0 ? 'permissions' : 'embedding';
   sceneEl.innerHTML = '';
   restartBtn.hidden = (id === 'intro');
+  document.querySelector('.stage').classList.toggle('wide', n.type === 'result' || n.type === 'permresult' || n.type === 'summary');
   if(n.type === 'intro'){ renderIntro(); updateTrail(); return; }
   if(n.type === 'question'){ renderQuestion(id,n); }
   else if(n.type === 'permresult'){ renderPermResult(id,n); }
@@ -751,22 +777,28 @@ function renderResult(id,n){
   const why = n.why.map(w=>`<li><span class="mb-dot"></span><span>${w}</span></li>`).join('');
   const path = capabilityLabel();
   el.innerHTML = `
-    <div class="verdict-tag"><span class="check">${ICONS.check}</span>Your embedding path</div>
-    <h1 class="verdict">${n.verdict}</h1>
-    <p class="tagline">${n.tagline}</p>
-
-    <div class="panel">
-      <div class="phead">Why this fits · ${path}</div>
-      <ul class="why">${why}</ul>
-      <div style="padding:0 22px 22px">
+    <div class="result-panel">
+      <div class="rp-verdict">
+        <div class="verdict-tag"><span class="check">${ICONS.check}</span>Your embedding path</div>
+        <h1 class="verdict">${n.verdict}</h1>
+        <p class="tagline">${n.tagline}</p>
+        <a class="doc-link on-fill" href="${DOCS[n.verdict] || 'https://www.metabase.com/product/embedded-analytics'}" target="_blank" rel="noopener">
+          ${ICONS.doc} Read the ${n.verdict} docs
+        </a>
+      </div>
+      <div class="rp-body">
+        <div class="phead">Why this fits · ${path}</div>
+        <ul class="why">${why}</ul>
         <div class="note">${ICONS.bulb}<div><b>Worth knowing.</b> ${n.note}</div></div>
       </div>
     </div>
 
     <div class="next-cta">
-      <div class="k">Optional · Part 2</div>
-      <h3>${ICONS.db}<span>Now map out your permissions strategy</span></h3>
-      <p>You've picked how to embed. The next journey works out how to keep each customer's data separate — based on how your data is arranged. ${PERM[n.arch].blurb}</p>
+      <div class="nc-body">
+        <div class="k">Part 2</div>
+        <h3>${ICONS.db}<span>Now map out your permissions strategy</span></h3>
+        <p>You've picked how to embed. Next, keep each customer's data separate based on how it's arranged. ${PERM[n.arch].blurb}</p>
+      </div>
       <button class="btn-purple" onclick="startPermissions('${n.arch}','${id}')">
         Start the permissions journey ${ICONS.arrow}
       </button>
@@ -774,9 +806,6 @@ function renderResult(id,n){
 
     <div class="actions">
       <button class="btn-ghost" onclick="back()">${ICONS.back} Back a step</button>
-      <a class="doc-link" href="${DOCS[n.verdict] || 'https://www.metabase.com/product/embedded-analytics'}" target="_blank" rel="noopener">
-        Read the ${n.verdict} docs ${ICONS.arrow}
-      </a>
     </div>`;
   sceneEl.appendChild(el);
 }
@@ -793,24 +822,27 @@ function renderPermResult(id,n){
   }
   const how = r.how.map(w=>`<li><span class="mb-dot purple"></span><span>${w}</span></li>`).join('');
   el.innerHTML = `
-    <div class="verdict-tag part2"><span class="check">${ICONS.check}</span>Your permissions strategy</div>
-    <h1 class="verdict">${r.verdict}</h1>
-    <p class="tagline">${r.tagline}</p>
-
-    <div class="panel part2">
-      <div class="phead">How to set it up</div>
-      <ul class="why">${how}</ul>
-      <div style="padding:0 22px 22px">
+    <div class="result-panel part2">
+      <div class="rp-verdict">
+        <div class="verdict-tag part2"><span class="check">${ICONS.check}</span>Your permissions strategy</div>
+        <h1 class="verdict">${r.verdict}</h1>
+        <p class="tagline">${r.tagline}</p>
+        <a class="doc-link on-fill" href="https://www.metabase.com/learn/metabase-basics/embedding/overview" target="_blank" rel="noopener">
+          ${ICONS.doc} Read the docs
+        </a>
+      </div>
+      <div class="rp-body">
+        <div class="phead">How to set it up</div>
+        <ul class="why">${how}</ul>
         <div class="note part2">${ICONS.bulb}<div><b>Worth knowing.</b> ${r.note}</div></div>
       </div>
     </div>
 
     <div class="actions">
+      <button class="btn-ghost" onclick="back()">${ICONS.back} Back a step</button>
       <button class="btn-purple" onclick="go('summary','perm_result')">
         See your full plan ${ICONS.arrow}
       </button>
-      <a class="btn-ghost" href="https://www.metabase.com/learn/metabase-basics/embedding/overview" target="_blank" rel="noopener">Read the docs</a>
-      <button class="btn-ghost" onclick="back()">${ICONS.back} Back a step</button>
     </div>`;
   sceneEl.appendChild(el);
 }
@@ -853,7 +885,7 @@ function renderSummary(){
     <div class="actions">
       <button class="btn-ghost" onclick="back()">${ICONS.back} Back a step</button>
       <a class="doc-link" href="${DOCS[emb.verdict] || 'https://www.metabase.com/product/embedded-analytics'}" target="_blank" rel="noopener">
-        Read the ${emb.verdict} docs ${ICONS.arrow}
+        ${ICONS.doc} Read the ${emb.verdict} docs
       </a>
     </div>`;
   sceneEl.appendChild(el);
@@ -917,14 +949,14 @@ function updateTrail(){
   const type = NODES[state.current].type;
   const isResult = (type === 'result' || type === 'permresult');
   const label = perm ? 'Part 2 · Permissions' : 'Part 1 · Embedding';
-  let html = `<span class="trail-label ${perm?'p2':''}">${label}</span>`;
+  let dots = '';
   for(let i=0;i<steps;i++){
     const link = i>0 ? `<span class="link ${perm?'p2':''}"></span>` : '';
-    html += `<span class="seg">${link}<span class="node done ${perm?'p2':''}" title="step ${i+1}"></span></span>`;
+    dots += `<span class="seg">${link}<span class="node done ${perm?'p2':''}" title="step ${i+1}"></span></span>`;
   }
   const curLink = steps>0 ? `<span class="link ${perm?'p2':''}"></span>` : '';
-  html += `<span class="seg">${curLink}<span class="node ${isResult?'':'current'} ${perm?'p2':''}" title="you are here"></span></span>`;
-  trailEl.innerHTML = html;
+  dots += `<span class="seg">${curLink}<span class="node ${isResult?'':'current'} ${perm?'p2':''}" title="you are here"></span></span>`;
+  trailEl.innerHTML = `<span class="trail-label ${perm?'p2':''}">${label}</span><div class="dots-row">${dots}</div>`;
 }
 
 /* boot */
