@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Find Your Metabase Embedding Setup</title>
+<title>Choose Your Embedding Adventure · Metabase</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='9' fill='%23509EE3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -319,11 +319,6 @@
   }
   .next-cta .k::before{content:"";width:18px;height:1.5px;background:var(--purple);border-radius:2px}
   .next-cta .nc-body{flex:1;min-width:240px}
-  .next-cta h3{
-    font-family:var(--font-display);font-weight:900;font-size:1.32rem;letter-spacing:-.02em;color:var(--ink);
-    display:flex;align-items:center;gap:11px;line-height:1.15;
-  }
-  .next-cta h3 svg{flex:none;stroke:#8A5FB5}
   .next-cta p{margin-top:11px;font-size:.98rem;line-height:1.55;color:var(--slate);max-width:56ch}
   .btn-purple{
     display:inline-flex;align-items:center;gap:9px;flex:none;
@@ -457,7 +452,7 @@
   </a>
   <button class="restart" id="restartBtn" hidden onclick="restart()">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
-    Start again
+    Start over
   </button>
 </header>
 
@@ -469,8 +464,8 @@
 </main>
 
 <footer>
-  Learn more in the <a href="https://www.metabase.com/learn/metabase-basics/embedding/overview" target="_blank" rel="noopener">embedding guides</a>
-  or compare options on the <a href="https://www.metabase.com/product/embedded-analytics" target="_blank" rel="noopener">embedded analytics page</a>.
+  Dig deeper in the <a href="https://www.metabase.com/learn/metabase-basics/embedding/overview" target="_blank" rel="noopener">embedding guides</a>
+  or the <a href="https://www.metabase.com/product/embedded-analytics" target="_blank" rel="noopener">embedded analytics overview</a>.
 </footer>
 
 <script>
@@ -489,7 +484,6 @@ const ICONS = {
   back:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>',
   check:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
   bulb:'<svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D7CC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.1 14a5 5 0 1 0-6.2 0c.5.4 1.1 1.2 1.1 2h4c0-.8.6-1.6 1.1-2Z"/></svg>',
-  db:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2D7CC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>',
   chev:'<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>',
   seats:'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#2D7CC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
   doc:'<svg width="17" height="17" viewBox="0 0 443 443" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M55.375 62.2969C43.9066 62.2969 34.6094 71.5941 34.6094 83.0625V332.25C34.6094 343.718 43.9066 353.016 55.375 353.016H143.187C152.366 353.016 161.17 356.662 167.66 363.152L206.813 402.308C210.707 406.203 215.989 408.391 221.496 408.391C227.004 408.391 232.285 406.203 236.18 402.308L275.339 363.152C281.831 356.662 290.633 353.016 299.811 353.016H387.625C399.093 353.016 408.391 343.718 408.391 332.25V83.0625C408.391 71.5941 399.093 62.2969 387.625 62.2969H299.811C279.619 62.2969 260.252 70.3182 245.973 84.5964L221.498 109.07L197.028 84.5994C182.749 70.3193 163.381 62.2969 143.187 62.2969H55.375ZM76.1406 311.484V103.828H143.187C152.366 103.828 161.17 107.475 167.66 113.966L200.734 147.042V337.494L197.028 333.787C182.749 319.508 163.381 311.484 143.187 311.484H76.1406ZM242.266 337.491L245.973 333.784C260.252 319.505 279.619 311.484 299.811 311.484H366.859V103.828H299.811C290.633 103.828 281.831 107.474 275.339 113.964L242.266 147.036V337.491Z" fill="currentColor"/></svg>'
@@ -498,56 +492,54 @@ const ICONS = {
 /* ---- permissions journey (part 2) data, keyed by embedding model + data layout ---- */
 const PERM = {
   locked:{
-    blurb:"Guest embeds use signed parameters to restrict the data shown in each embed.",
     commingled:{
       verdict:"Locked parameters",
-      tagline:"Pass a signed tenant identifier with every embed.",
+      tagline:"Scope every guest embed down to a single tenant with a signed parameter.",
       how:[
-        "Create a <b>locked parameter</b> for a tenant field such as <code>customer_id</code>.",
-        "Sign the parameter on your server and include the customer's value in the embed request."
+        "Use a <b>Locked parameter</b> and pass a unique identifier like <code>customer_id</code>.",
+        "Each customer only ever sees the rows that match their identifier."
       ],
       note:"The <b>Locked parameter is not a paid feature</b>."
     },
     isolated:{
       verdict:"Serialization",
-      tagline:"Maintain a separate copy of the embedded content for each tenant.",
+      tagline:"Stamp out a copy of your dashboards for each tenant.",
       how:[
-        "Use <b>Serialization</b> to copy dashboards when every tenant uses the same table structure.",
-        "Map each copy to that tenant's database or schema. If structures differ, you will need tenant-specific content or a standardized data model."
+        "If all customers share the same table structure, programmatically duplicate dashboards using <b>Serialization</b>.",
+        "If their structures differ, this approach runs out of road."
       ],
-      note:"If you move to shared tables later, locked parameters can restrict each guest embed to one tenant."
+      note:"The <b>Locked parameter is not a paid feature</b> — handy if you fall back to commingled tables."
     }
   },
   rls:{
-    blurb:"Authenticated embeds can use user attributes and database routing to enforce tenant access.",
     commingled:{
       verdict:"Row & column level security",
-      tagline:"Use signed-in user attributes to filter shared tables.",
+      tagline:"Let per-user attributes scope the data automatically.",
       how:[
-        "Add a tenant identifier, such as <code>customer_id</code>, to each embedded user's attributes.",
-        "Use <b>row- and column-level security</b> to match those attributes to the rows and fields that user may access."
+        "Apply <b>row- and column-level security using per-user attributes</b>.",
+        "Every embed filters down to the signed-in customer on its own."
       ],
-      note:"If embedded users can write SQL, configure <b>Impersonation</b> so database permissions still apply to their queries."
+      note:"If customers can run their own <b>SQL</b>, add <b>Impersonation</b> so queries respect each tenant's permissions."
     },
     isolated:{
       verdict:"Database routing",
-      tagline:"Route each signed-in user to the correct tenant database or schema.",
+      tagline:"Send each customer to their own database or schema.",
       how:[
-        "Use <b>database routing</b> when every tenant database or schema has the same table structure.",
-        "For schema-per-tenant setups, add each schema as a separate Metabase database connection, then route users by an attribute."
+        "Use <b>database routing</b> when all schemas/databases share the same table structure.",
+        "Using schemas? Connect each schema as its own database connection, then route."
       ],
-      note:"If embedded users can write SQL, also configure <b>Impersonation</b> to preserve database-level permissions."
+      note:"If customers can run their own <b>SQL</b>, you'll also need <b>Impersonation</b>."
     }
   }
 };
 
 /* ---- shared result building blocks ---- */
-const SSO_NOTE = "Modular Embedding SSO works in any application that can display an iframe.";
+const SSO_NOTE = "You can use Modular Embedding SSO in <b>any application that's compatible with an iframe</b>.";
 
 /* ---- billing, by auth mode: guests have no Metabase account, signed-in users do ---- */
 const SEATS = {
-  none:"Guest viewers do not need Metabase accounts, so they do not count as billable seats.",
-  billable:"Every signed-in embedded user has a Metabase account and counts as a billable seat."
+  none:"Guest viewers don't count as billable seats, since guests don't need their own Metabase accounts.",
+  billable:"Each signed-in user has their own Metabase account, so they count toward your billable seats."
 };
 
 /* ---- direct documentation per embedding type ---- */
@@ -573,145 +565,145 @@ const NODES = {
   /* ---------------- chapter 1 : capabilities ---------------- */
   capabilities:{
     type:'question',
-    title:"What do customers need to do?",
-    sub:"Choose the most advanced action they need inside your product.",
+    title:"What should customers be able to do?",
+    sub:"Pick the use case that fits your customers. You can turn more on later — it's the same embed underneath.",
     choices:[
-      {b:"View dashboards", s:"View charts and use dashboard filters.", to:'view_depth'},
-      {b:"Explore results", s:"Open chart details and drill into the underlying data.", to:'drill_depth'},
-      {b:"Create reports", s:"Build questions and dashboards, with or without AI assistance.", to:'create_scope'}
+      {b:"View and filter", s:"They see dashboards and change filters.", to:'view_depth'},
+      {b:"Explore on click", s:"They click into a chart to dig into the detail behind it.", to:'drill_depth'},
+      {b:"Build their own", s:"Full self-serve: they build their own questions and dashboards, with or without AI.", to:'create_scope'}
     ],
-    caption:"This choice controls the interface. You will configure data access separately in part 2."
+    caption:"These set what the embedded interface offers, not who can see what data. Data access is controlled separately by permissions, on every option."
   },
 
   /* ================= DRILL-THROUGH branch ================= */
   drill_depth:{
     type:'question',
-    title:"How much control do you need over the interface?",
-    sub:"Choose between a ready-made iframe and React components you can integrate into your product UI.",
+    title:"How deep does the integration go?",
+    sub:"Decide whether analytics should sit inside your app or feel like part of it.",
     choices:[
-      {b:"A themed iframe", s:"Embed the ready-made interface and style it to match your brand.", to:'r_sso_drill'},
-      {b:"Custom React components", s:"Place analytics in your own layouts and connect it to product workflows.", req:"Requires a React frontend", to:'r_sdk_drill'}
+      {b:"Drop it in, styled to your brand", s:"Use a ready-made analytics view that matches your brand.", to:'r_sso_drill'},
+      {b:"Deeply integrated", s:"Build analytics into your own layout and workflows.", req:"*Requires a React frontend", to:'r_sdk_drill'}
     ]
   },
 
   /* ================= CREATE branch ================= */
   create_scope:{
     type:'question',
-    title:"What should customers create with?",
-    sub:"Embed selected creation tools or give customers the complete Metabase application.",
+    title:"How much Metabase: pieces or the whole app?",
+    sub:"Give customers only the tools they need, or the full Metabase experience.",
     choices:[
-      {b:"The full Metabase app", s:"Include browsing, query creation, dashboards, and other Metabase workflows.", to:'r_fullapp'},
-      {b:"Selected components", s:"Embed only the dashboards, charts, or query builder your product needs.", to:'create_depth'}
+      {b:"Whole app", s:"The complete Metabase experience, embedded and themed as your own.", to:'r_fullapp'},
+      {b:"Pieces", s:"Embed individual dashboards, charts, or the query builder — not the whole app.", to:'create_depth'}
     ]
   },
   create_depth:{
     type:'question',
-    title:"How much control do you need over the interface?",
-    sub:"Choose between ready-made embedded components and React components you can customize in code.",
+    title:"How deep does the integration go?",
+    sub:"You're embedding pieces of Metabase. How tightly do they need to weave into your product?",
     choices:[
-      {b:"A themed iframe", s:"Embed the ready-made interface and style it to match your brand.", to:'r_sso_create'},
-      {b:"Custom React components", s:"Control the layout and connect analytics to product workflows.", req:"Requires a React frontend", to:'r_sdk_create'}
+      {b:"Drop it in, styled to your brand", s:"Use a ready-made analytics view that matches your brand.", to:'r_sso_create'},
+      {b:"Deeply integrated", s:"Build analytics into your own layout and workflows.", req:"*Requires a React frontend", to:'r_sdk_create'}
     ]
   },
 
   /* ================= VIEW-ONLY branch ================= */
   view_depth:{
     type:'question',
-    title:"How much control do you need over the interface?",
-    sub:"Choose between a ready-made iframe and React components you can integrate into your product UI.",
+    title:"How deep does the integration go?",
+    sub:"View-only embeds are the lightest-weight option. How far into your product do they need to reach?",
     choices:[
-      {b:"A themed iframe", s:"Embed a ready-made dashboard and style it to match your brand.", to:'r_guest'},
-      {b:"Custom React components", s:"Control the layout and connect analytics to product workflows.", req:"Requires a React frontend", to:'r_sdk_view'}
+      {b:"Drop it in, styled to your brand", s:"Use a ready-made analytics view that matches your brand.", to:'r_guest'},
+      {b:"Deeply integrated", s:"Build analytics into your own layout and workflows.", req:"*Requires a React frontend", to:'r_sdk_view'}
     ]
   },
 
   /* ================= RESULTS ================= */
   r_guest:{
     type:'result', verdict:"Modular Embedding Guest", seats:'none',
-    tagline:"Embed view-and-filter dashboards in an iframe without creating viewer accounts.",
+    tagline:"Signed, locked-down dashboards, dropped straight into an iframe.",
     why:[
-      "Customers only need dashboards and filters; they do not need drill-through or report creation.",
-      "A ready-made iframe meets your integration needs.",
-      "Guest access avoids a separate Metabase account for every viewer."
+      "Your customers only need to see dashboards and change filters.",
+      "Whitelabeling covers your styling needs.",
+      "It slots into any app that can host an iframe."
     ],
-    note:"If customers later need drill-through or report creation, switch the modular embed from guest authentication to SSO. The embedded component can stay the same.",
+    note:"Guest and SSO embeds are both modular embedding, the same components underneath. So you can start with Guest and add drill-through or self-serve later without rebuilding: you're changing the auth mode, not the embed.",
     arch:'locked'
   },
   r_sso_drill:{
     type:'result', verdict:"Modular Embedding SSO", seats:'billable',
-    tagline:"Embed drill-through analytics in an iframe and authenticate each viewer with SSO.",
+    tagline:"Drill-through analytics with SSO, running inside an iframe.",
     why:[
-      "Customers need to open chart details and explore results.",
-      "The ready-made iframe provides that interaction without a React integration.",
-      "SSO identifies each viewer so Metabase can apply user-specific permissions."
+      "Customers click into a chart to dig into the detail behind it.",
+      "An iframe works for you, so no React or custom components needed.",
+      "When you want finer control over the look, you can go further with theming."
     ],
-    note:SSO_NOTE + " Interface settings control available actions; permissions control which data each user can access.",
+    note:SSO_NOTE + " Turning off drill-through changes what the interface offers, not what data someone can reach. Data access is still governed separately by permissions.",
     arch:'rls'
   },
   r_sdk_drill:{
     type:'result', verdict:"Modular Embedding SDK", seats:'billable',
-    tagline:"Add drill-through analytics as React components inside your product interface.",
+    tagline:"React-native embeds you can bend to fit your product.",
     why:[
-      "Your frontend uses React.",
-      "Customers need to explore chart details.",
-      "You need control over component layout, behavior, or interactions with the rest of your app."
+      "Your frontend is built on React.",
+      "You need custom functionality on the embedded components — or a workflow that talks to your core app from inside the embed.",
+      "The SDK gives the deepest, most native integration."
     ],
-    note:"The SDK requires more implementation work than an iframe. Use it when you need code-level control over the analytics experience.",
+    note:"Choose the SDK when an iframe simply can't reach far enough into your product.",
     arch:'rls'
   },
   r_fullapp:{
     type:'result', verdict:"Full app embedding", seats:'billable',
-    tagline:"Embed the complete Metabase application for customers who need full self-service.",
+    tagline:"The whole of Metabase, embedded and themed as your own.",
     why:[
-      "Customers need to create and manage their own questions and dashboards.",
-      "They need the full Metabase workflow, not a limited set of components.",
-      "An iframe meets your integration needs, so a custom React implementation is unnecessary."
+      "Customers create their own questions and dashboards — true self-serve, with or without AI.",
+      "An iframe works for you; you don't need React-specific custom components.",
+      "Customers get the complete Metabase experience inside your product."
     ],
-    note:"Full app embedding exposes more of Metabase than modular embedding. Review navigation, permissions, and feature visibility before launch.",
+    note:"This hands customers the full toolkit, including the query builder, without you rebuilding it.",
     arch:'rls'
   },
   r_sdk_create:{
     type:'result', verdict:"Modular Embedding SDK", seats:'billable',
-    tagline:"Embed report creation as customizable React components.",
+    tagline:"Self-serve analytics, stitched natively into a React product.",
     why:[
-      "Your frontend uses React.",
-      "Customers need to create their own reports.",
-      "You need code-level control over the layout or connections to your product workflows."
+      "Your frontend is built on React.",
+      "Customers build their own reports, and you need custom components or workflows that interact with your core app.",
+      "It's the most flexible path — bespoke UI plus full authoring."
     ],
-    note:"The SDK gives you interface control, but your team must build and maintain the surrounding React experience.",
+    note:"The SDK is the way to go when you want self-serve power and a fully custom React surface.",
     arch:'rls'
   },
   r_sso_create:{
     type:'result', verdict:"Modular Embedding SSO", seats:'billable',
-    tagline:"Let signed-in customers create reports in selected Metabase components inside an iframe.",
+    tagline:"Self-serve on embedded Metabase pieces, dropped into an iframe with SSO.",
     why:[
-      "Customers need report creation, but not the complete Metabase application.",
-      "Ready-made embedded components cover the required workflows.",
-      "SSO identifies each customer so Metabase can apply user-specific permissions."
+      "Customers build their own reports, but you're embedding pieces — not the whole app.",
+      "An iframe meets your needs — no custom build or React-specific components required.",
+      "Reach for CSS customization/theming whenever you want finer control over the theme."
     ],
     note:SSO_NOTE,
     arch:'rls'
   },
   r_sdk_view:{
     type:'result', verdict:"Modular Embedding SDK", seats:'billable',
-    tagline:"Add view-and-filter dashboards as React components inside your product interface.",
+    tagline:"React-native embeds you can bend to fit your product.",
     why:[
-      "Your frontend uses React.",
-      "Customers only need to view dashboards and use filters.",
-      "You need code-level control over component layout, behavior, or product integration."
+      "Your frontend is built on React.",
+      "Customers view and filter dashboards, and you're building the embed deeply into your own UI.",
+      "The SDK gives the deepest, most native integration."
     ],
-    note:"The SDK requires more implementation work than an iframe. Use it only when the additional interface control is important.",
+    note:"Choose the SDK when an iframe simply can't reach far enough into your product.",
     arch:'rls'
   },
 
   /* ============ PERMISSIONS JOURNEY · optional part 2 ============ */
   perm_data:{
     type:'question',
-    title:"Where does each customer's data live?",
-    sub:"Your data layout determines how Metabase should enforce tenant isolation.",
+    title:"How is your customers' data arranged?",
+    sub:"This decides how you keep each tenant's data separated.",
     choices:[
-      {b:"Shared tables", s:"Rows for multiple customers live in the same tables.", arr:'commingled', to:'perm_result'},
-      {b:"Separate database or schema", s:"Each customer has a dedicated database or schema with the same structure.", arr:'isolated', to:'perm_result'}
+      {b:"One shared database", s:"All customers' data lives together — commingled tables, multi-tenant structure.", arr:'commingled', to:'perm_result'},
+      {b:"A database or schema per customer", s:"Each customer has their own database, or their own schema.", arr:'isolated', to:'perm_result'}
     ]
   },
   perm_result:{ type:'permresult' },
@@ -764,10 +756,10 @@ function renderIntro(){
   el.className = 'scene intro';
   el.innerHTML = `
     <img class="hero-illo" src="embedding-hero.svg" alt="" aria-hidden="true">
-    <h1>Find the right <em>Metabase embed</em></h1>
-    <p>Answer a few questions about what customers need to do, how you want to integrate analytics, and where customer data lives. You'll get a recommended embedding method and data-isolation setup.</p>
+    <h1>Choose your <em>embedding</em> adventure</h1>
+    <p>Answer a few quick questions to find the right way to embed Metabase in your product. Then we'll guide you through choosing the right permissions and data isolation strategy.</p>
     <button class="start" onclick="go('capabilities','intro')">
-      Find my setup
+      Get started
       ${ICONS.arrow}
     </button>`;
   sceneEl.appendChild(el);
@@ -792,7 +784,7 @@ function renderQuestion(id,n){
     ${n.sub?`<p class="sub">${n.sub}</p>`:''}
     <div class="choices">${choices}</div>
     ${n.caption?`<p class="choices-note">${n.caption}</p>`:''}
-    <div class="backrow"><button class="back" ${history.length?'':'hidden'} onclick="back()">${ICONS.back} Back</button></div>`;
+    <div class="backrow"><button class="back" ${history.length?'':'hidden'} onclick="back()">${ICONS.back} Back a step</button></div>`;
   sceneEl.appendChild(el);
 }
 
@@ -803,40 +795,40 @@ function renderResult(id,n){
   el.innerHTML = `
     <div class="result-panel">
       <div class="rp-verdict">
-        <div class="verdict-tag"><span class="check">${ICONS.check}</span>Recommended embedding method</div>
+        <div class="verdict-tag"><span class="check">${ICONS.check}</span>Your embedding path</div>
         <h1 class="verdict">${n.verdict}</h1>
         <p class="tagline">${n.tagline}</p>
         <a class="doc-link on-fill" href="${DOCS[n.verdict] || 'https://www.metabase.com/product/embedded-analytics'}" target="_blank" rel="noopener">
-          ${ICONS.doc} View implementation docs
+          ${ICONS.doc} Read the ${n.verdict} docs
         </a>
       </div>
       <div class="rp-body">
-        <div class="phead">Why we recommend it</div>
+        <div class="phead">Why this fits</div>
         <ul class="why">${why}</ul>
-        <div class="note">${ICONS.bulb}<div><b>Implementation note:</b> ${n.note}</div></div>
+        <div class="note">${ICONS.bulb}<div><b>Worth knowing.</b> ${n.note}</div></div>
       </div>
     </div>
 
     ${n.seats?`<div class="billing-cta">
       <span class="ic">${ICONS.seats}</span>
       <div class="bc-body">
-        <div class="k">Seat impact</div>
+        <div class="k">Billing</div>
         <p>${SEATS[n.seats]}</p>
       </div>
     </div>`:''}
 
     <div class="next-cta">
       <div class="nc-body">
-        <div class="k">Next: data access</div>
-        <p>Choose how customer data is stored to get the matching tenant-isolation setup.</p>
+        <div class="k">Part 2</div>
+        <p>You've picked how to embed. Next, keep each customer's data separated so everyone only sees their own.</p>
       </div>
       <button class="btn-purple" onclick="startPermissions('${n.arch}','${id}')">
-        Choose data isolation ${ICONS.arrow}
+        Start the permissions journey ${ICONS.arrow}
       </button>
     </div>
 
     <div class="actions">
-      <button class="btn-ghost" onclick="back()">${ICONS.back} Back</button>
+      <button class="btn-ghost" onclick="back()">${ICONS.back} Back a step</button>
     </div>`;
   sceneEl.appendChild(el);
 }
@@ -847,32 +839,32 @@ function renderPermResult(id,n){
   el.className = 'scene';
   if(!r){ // safety fallback if landed here without context
     el.innerHTML = `<div class="eyebrow">Part 2 · Permissions</div>
-      <h1 class="q">Choose your data layout first</h1>
-      <div class="backrow"><button class="back" onclick="go('perm_data',null)">${ICONS.back} Choose data layout</button></div>`;
+      <h1 class="q">Let's pick your data layout first.</h1>
+      <div class="backrow"><button class="back" onclick="go('perm_data',null)">${ICONS.back} Choose data arrangement</button></div>`;
     sceneEl.appendChild(el); return;
   }
   const how = r.how.map(w=>`<li><span class="mb-dot purple"></span><span>${w}</span></li>`).join('');
   el.innerHTML = `
     <div class="result-panel part2">
       <div class="rp-verdict">
-        <div class="verdict-tag part2"><span class="check">${ICONS.check}</span>Recommended data-isolation method</div>
+        <div class="verdict-tag part2"><span class="check">${ICONS.check}</span>Your permissions strategy</div>
         <h1 class="verdict">${r.verdict}</h1>
         <p class="tagline">${r.tagline}</p>
         <a class="doc-link on-fill" href="https://www.metabase.com/learn/metabase-basics/embedding/overview" target="_blank" rel="noopener">
-          ${ICONS.doc} View permissions docs
+          ${ICONS.doc} Read the docs
         </a>
       </div>
       <div class="rp-body">
-        <div class="phead">What to configure</div>
+        <div class="phead">How to set it up</div>
         <ul class="why">${how}</ul>
-        <div class="note part2">${ICONS.bulb}<div><b>Implementation note:</b> ${r.note}</div></div>
+        <div class="note part2">${ICONS.bulb}<div><b>Worth knowing.</b> ${r.note}</div></div>
       </div>
     </div>
 
     <div class="actions">
-      <button class="btn-ghost" onclick="back()">${ICONS.back} Back</button>
+      <button class="btn-ghost" onclick="back()">${ICONS.back} Back a step</button>
       <button class="btn-purple" onclick="go('summary','perm_result')">
-        Review recommendation ${ICONS.arrow}
+        See your full plan ${ICONS.arrow}
       </button>
     </div>`;
   sceneEl.appendChild(el);
@@ -884,27 +876,27 @@ function renderSummary(){
   const el = document.createElement('section');
   el.className = 'scene';
   if(!emb || !perm){
-    el.innerHTML = `<div class="eyebrow">Your recommendation</div>
-      <h1 class="q">Complete both sections first</h1>
-      <p class="sub">Choose an embedding method and a data layout to generate the full recommendation.</p>
-      <div class="backrow"><button class="back" onclick="go('capabilities','intro')">${ICONS.back} Start questions</button></div>`;
+    el.innerHTML = `<div class="eyebrow">Your plan</div>
+      <h1 class="q">Let's finish the journey first.</h1>
+      <p class="sub">Pick an embedding path, then map out permissions, and your full plan will appear here.</p>
+      <div class="backrow"><button class="back" onclick="go('capabilities','intro')">${ICONS.back} Begin the journey</button></div>`;
     sceneEl.appendChild(el); return;
   }
   el.innerHTML = `
-    <div class="verdict-tag plan"><span class="check">${ICONS.check}</span>Recommendation complete</div>
-    <h1 class="verdict">Your Metabase setup</h1>
-    <p class="tagline">Use <b>${emb.verdict}</b> for the interface and <b>${perm.verdict}</b> to isolate customer data.</p>
+    <div class="verdict-tag plan"><span class="check">${ICONS.check}</span>Adventure complete</div>
+    <h1 class="verdict">Your embedding plan</h1>
+    <p class="tagline">Embed with <b>${emb.verdict}</b>, then keep each tenant's data separate using <b>${perm.verdict}</b>.</p>
 
     <div class="recap">
       <div class="recap-card blue">
-        <div class="rc-k">Embedding method</div>
+        <div class="rc-k">How to embed</div>
         <h3>${emb.verdict}</h3>
         <p>${emb.tagline}</p>
         <div class="rc-foot">${ICONS.bulb}<span>${emb.note}</span></div>
       </div>
       <div class="recap-arrow">${ICONS.arrow}</div>
       <div class="recap-card purple">
-        <div class="rc-k">Data isolation</div>
+        <div class="rc-k">How to isolate data</div>
         <h3>${perm.verdict}</h3>
         <p>${perm.tagline}</p>
         <div class="rc-foot">${ICONS.bulb}<span>${perm.note}</span></div>
@@ -914,9 +906,9 @@ function renderSummary(){
     ${demoSection(emb)}
 
     <div class="actions">
-      <button class="btn-ghost" onclick="back()">${ICONS.back} Back</button>
+      <button class="btn-ghost" onclick="back()">${ICONS.back} Back a step</button>
       <a class="doc-link" href="${DOCS[emb.verdict] || 'https://www.metabase.com/product/embedded-analytics'}" target="_blank" rel="noopener">
-        ${ICONS.doc} View implementation docs
+        ${ICONS.doc} Read the ${emb.verdict} docs
       </a>
     </div>`;
   sceneEl.appendChild(el);
@@ -928,10 +920,10 @@ function demoSection(n){
   const name = n.verdict;
   return `
     <div class="demo-cta">
-      <div class="rc-k" style="color:var(--blue-deep)">Interactive example</div>
-      <h3>Try ${name}</h3>
-      <p>Open an interactive example to see how this embedding method behaves inside a product.</p>
-      <a class="btn-primary demo-btn" href="${url}" target="_blank" rel="noopener">Open demo&nbsp;↗</a>
+      <div class="rc-k" style="color:var(--blue-deep)">See it live</div>
+      <h3>Preview a ${name} demo</h3>
+      <p>Open a real, interactive ${name} example in a new tab to get a feel for how it looks inside a product.</p>
+      <a class="btn-primary demo-btn" href="${url}" target="_blank" rel="noopener">See a live demo&nbsp;↗</a>
     </div>`;
 }
 
@@ -972,7 +964,7 @@ function updateTrail(){
   const steps = Math.max(0, history.length - base);
   const type = NODES[state.current].type;
   const isResult = (type === 'result' || type === 'permresult');
-  const label = perm ? 'Part 2 · Data access' : 'Part 1 · Embedding';
+  const label = perm ? 'Part 2 · Permissions' : 'Part 1 · Embedding';
   let dots = '';
   for(let i=0;i<steps;i++){
     const link = i>0 ? `<span class="link ${perm?'p2':''}"></span>` : '';
