@@ -115,7 +115,7 @@
   .sub{margin-top:14px;font-size:1.04rem;line-height:1.55;color:var(--slate);max-width:54ch}
   /* muted caption under a question's choices — UX scope vs data access */
   .choices-note{
-    margin-top:14px;font-size:.86rem;line-height:1.5;color:var(--slate-soft);max-width:68ch;
+    margin-top:10px;font-size:.86rem;line-height:1.5;color:var(--slate-soft);
     padding-left:12px;border-left:2px solid var(--line);
   }
 
@@ -146,7 +146,7 @@
   .choice:hover .arrow-btn,.choice:focus-visible .arrow-btn{background:var(--blue-deep)}
   .choice .arrow{flex:none}
 
-  .backrow{margin-top:18px}
+  .backrow{margin-top:14px}
   .back{
     display:inline-flex;align-items:center;gap:8px;
     background:var(--card);color:var(--slate);border:1px solid var(--line);cursor:pointer;
@@ -399,7 +399,7 @@
 
   /* ---------- footer ---------- */
   footer{
-    flex:none;margin-top:auto;text-align:center;padding:14px 20px 14px;color:var(--slate-soft);
+    flex:none;margin-top:auto;text-align:center;padding:10px 20px 10px;color:var(--slate-soft);
     font-size:.8rem;line-height:1.5;width:100%;
   }
   footer a{color:var(--blue-deep);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
@@ -538,8 +538,8 @@ const SSO_NOTE = "Modular Embedding SSO works in any application that can displa
 
 /* ---- billing, by auth mode: guests have no Metabase account, signed-in users do ---- */
 const SEATS = {
-  none:"Guest viewers do not need Metabase accounts, so they do not count as billable seats.",
-  billable:"Every signed-in embedded user has a Metabase account and counts as a billable seat."
+  none:"Guest viewers don't count as billable seats, since guests don't need their own Metabase accounts.",
+  billable:"Each signed-in user has their own Metabase account, so they count toward your billable seats."
 };
 
 /* ---- direct documentation per embedding type ---- */
@@ -572,7 +572,7 @@ const NODES = {
       {b:"Explore results", s:"Open chart details and drill into the underlying data.", to:'drill_depth'},
       {b:"Create reports", s:"Build questions and dashboards, with or without AI assistance.", to:'create_scope'}
     ],
-    caption:"This choice controls the interface. You will configure data access separately in part 2."
+    caption:"This choice controls the interface and level of interactivity. Modular Embedding Guest supports viewing and filtering, while Modular Embedding SSO adds drill-through and content creation. You'll configure data access separately in part 2."
   },
 
   /* ================= DRILL-THROUGH branch ================= */
@@ -812,7 +812,7 @@ function renderResult(id,n){
     ${n.seats?`<div class="billing-cta">
       <span class="ic">${ICONS.seats}</span>
       <div class="bc-body">
-        <div class="k">Seat impact</div>
+        <div class="k">Billing</div>
         <p>${SEATS[n.seats]}</p>
       </div>
     </div>`:''}
