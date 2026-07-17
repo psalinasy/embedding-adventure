@@ -907,7 +907,7 @@ function renderPermResult(id,n){
         <div class="verdict-tag part2"><span class="check">${ICONS.check}</span>Your permissions strategy</div>
         <h1 class="verdict">${r.verdict}</h1>
         <p class="tagline">${r.tagline}</p>
-        <a class="doc-link on-fill" href="https://www.metabase.com/learn/metabase-basics/embedding/overview" target="_blank" rel="noopener">
+        <a class="doc-link on-fill" href="${PERM_DOCS[r.verdict] || 'https://www.metabase.com/docs/latest/permissions/introduction'}" target="_blank" rel="noopener">
           ${ICONS.doc} Read the docs
         </a>
       </div>
