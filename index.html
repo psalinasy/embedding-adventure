@@ -542,7 +542,7 @@ const PERM = {
         "If all customers share the same table structure, programmatically duplicate dashboards using <b>Serialization</b>.",
         "If their structures differ, this approach runs out of road."
       ],
-      note:"The <b>Locked parameter is not a paid feature</b> — handy if you fall back to commingled tables."
+      note:"<b>The gotcha:</b> every tenant ends up with its own version of each dashboard and question, so you'll need to keep every change in sync across all of them via a <b>Git workflow</b>."
     }
   },
   rls:{
