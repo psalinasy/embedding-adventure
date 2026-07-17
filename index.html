@@ -387,6 +387,9 @@
   .recap-card.blue .rc-k{color:var(--blue-deep)}
   .recap-card.purple .rc-k{color:#8A5FB5}
   .recap-card h3{font-family:var(--font-display);font-weight:900;font-size:1.45rem;letter-spacing:-.02em;line-height:1.1;color:var(--ink)}
+  .recap-card h3 .rc-doc-link{color:inherit;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;text-decoration-color:rgba(0,0,0,.22);transition:text-decoration-color .15s}
+  .recap-card.blue h3 .rc-doc-link:hover{text-decoration-color:var(--blue)}
+  .recap-card.purple h3 .rc-doc-link:hover{text-decoration-color:var(--purple)}
   .recap-card>p{margin-top:9px;font-size:.97rem;line-height:1.5;color:var(--slate)}
   .recap-card .rc-foot{
     display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;
@@ -563,6 +566,14 @@ const DOCS = {
   "Modular Embedding SSO":"https://www.metabase.com/docs/latest/embedding/modular-embedding",
   "Modular Embedding SDK":"https://www.metabase.com/docs/latest/embedding/sdk/introduction",
   "Full app embedding":"https://www.metabase.com/docs/latest/embedding/full-app-embedding"
+};
+
+/* ---- direct documentation per data-isolation strategy ---- */
+const PERM_DOCS = {
+  "Database routing":"https://www.metabase.com/docs/latest/permissions/database-routing",
+  "Row & column level security":"https://www.metabase.com/docs/latest/permissions/row-and-column-security",
+  "Locked parameters":"https://www.metabase.com/docs/latest/embedding/static-embedding-parameters",
+  "Serialization":"https://www.metabase.com/docs/latest/installation-and-operation/serialization"
 };
 
 /* ---- live interactive demo per embedding type ---- */
@@ -906,14 +917,14 @@ function renderSummary(){
     <div class="recap">
       <div class="recap-card blue">
         <div class="rc-k">How to embed</div>
-        <h3>${emb.verdict}</h3>
+        <h3><a class="rc-doc-link" href="${DOCS[emb.verdict] || 'https://www.metabase.com/product/embedded-analytics'}" target="_blank" rel="noopener">${emb.verdict}</a></h3>
         <p>${emb.tagline}</p>
         <div class="rc-foot">${ICONS.bulb}<span>${emb.note}</span></div>
       </div>
       <div class="recap-arrow">${ICONS.arrow}</div>
       <div class="recap-card purple">
         <div class="rc-k">How to isolate data</div>
-        <h3>${perm.verdict}</h3>
+        <h3><a class="rc-doc-link" href="${PERM_DOCS[perm.verdict] || 'https://www.metabase.com/docs/latest/permissions/introduction'}" target="_blank" rel="noopener">${perm.verdict}</a></h3>
         <p>${perm.tagline}</p>
         <div class="rc-foot">${ICONS.bulb}<span>${perm.note}</span></div>
       </div>
@@ -923,8 +934,8 @@ function renderSummary(){
 
     <div class="actions">
       <button class="btn-ghost" onclick="back()">${ICONS.back} Back a step</button>
-      <a class="doc-link" href="${DOCS[emb.verdict] || 'https://www.metabase.com/product/embedded-analytics'}" target="_blank" rel="noopener">
-        ${ICONS.doc} Read the ${emb.verdict} docs
+      <a class="btn-primary" href="https://www.metabase.com/talk-to-a-person/?prev_page_title=embedding%20adventure&use_case=embedding" target="_blank" rel="noopener">
+        Talk to a Person&nbsp;↗
       </a>
     </div>`;
   sceneEl.appendChild(el);
