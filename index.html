@@ -114,23 +114,39 @@
      they aren't tab-reachable, so suppress the ring the browser would paint */
   h1[tabindex="-1"]:focus{outline:none}
   .sub{margin-top:14px;font-size:1.02rem;line-height:1.55;color:var(--slate);max-width:54ch}
-  /* muted caption under a question's choices — UX scope vs data access */
-  .choices-note{
-    margin-top:12px;font-size:.92rem;line-height:1.5;color:var(--slate-soft);
-    padding-left:14px;border-left:2px solid var(--line);
+  /* orientation note under a question — an info pill that opens a popover
+     so the guidance stays available without interrupting the choice flow */
+  .q-info-wrap{position:relative;margin-top:12px}
+  .q-info-pill{
+    display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    font-family:inherit;font-size:.86rem;font-weight:700;color:var(--blue-deep);
+    background:var(--blue-tint,rgba(45,124,196,.07));border:1px solid rgba(45,124,196,.22);
+    border-radius:999px;padding:6px 13px;transition:background .15s ease,border-color .15s ease;
   }
-  .choices-note p + p{margin-top:7px}
-  .choices-note b{color:var(--slate);font-weight:700}
-  /* the detail is collapsed by default so the question still fits a short viewport */
-  .choices-note details{margin-top:4px}
-  .choices-note summary{
-    cursor:pointer;color:var(--blue-deep);font-weight:700;
-    display:inline-flex;align-items:center;gap:5px;list-style:none;
+  .q-info-pill:hover,.q-info-pill:focus-visible{background:rgba(45,124,196,.12);border-color:var(--blue);outline:none}
+  .q-info-pill .info-ic{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:16px;height:16px;border-radius:50%;background:var(--blue-deep);color:#fff;
+    font-size:.72rem;font-weight:800;font-style:italic;line-height:1;
   }
-  .choices-note summary::-webkit-details-marker{display:none}
-  .choices-note summary::after{content:"⌄";line-height:1;transform:translateY(-2px);transition:transform .18s ease}
-  .choices-note details[open] summary::after{transform:translateY(1px) rotate(180deg)}
-  .choices-note details > p:first-of-type{margin-top:7px}
+  .q-info-pop{
+    position:absolute;top:calc(100% + 8px);left:0;z-index:40;
+    width:min(420px,calc(100vw - 48px));
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 18px 40px -12px rgba(20,40,70,.28);
+    padding:16px 18px;font-size:.9rem;line-height:1.55;color:var(--slate);
+  }
+  .q-info-pop[hidden]{display:none}
+  .q-info-pop .pop-title{
+    font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--ink);margin-bottom:8px;
+  }
+  .q-info-pop p + p{margin-top:8px}
+  .q-info-pop b{color:var(--ink);font-weight:700}
+  .q-info-pop .pop-close{
+    position:absolute;top:9px;right:11px;cursor:pointer;border:none;background:none;
+    font-size:1.1rem;line-height:1;color:var(--slate-soft);font-family:inherit;
+  }
+  .q-info-pop .pop-close:hover{color:var(--ink)}
 
   /* ---------- choices ---------- */
   /* grid + equal auto-rows so cards match height even when one carries an extra note */
@@ -805,12 +821,26 @@ function renderQuestion(id,n){
       <span class="arrow-btn">${ICONS.arrow}</span>
     </button>`;
   }).join('');
+  // orientation note: an info pill that opens a popover with the fuller
+  // explanation, so the guidance stays available without breaking the flow
+  const label = (n.caption||'').replace(/<[^>]+>/g,'').replace(/\.\s*$/,'');
+  const infoPill = n.caption
+    ? `<div class="q-info-wrap">
+         <button class="q-info-pill" aria-expanded="false" aria-controls="qInfoPop" onclick="toggleInfoPop(this)">
+           <span class="info-ic">i</span>${label}
+         </button>
+         <div class="q-info-pop" id="qInfoPop" role="dialog" aria-label="${label}" hidden>
+           <button class="pop-close" aria-label="Close" onclick="toggleInfoPop(document.querySelector('.q-info-pill'))">×</button>
+           ${n.captionMore||''}
+         </div>
+       </div>`
+    : '';
   el.innerHTML = `
     ${n.chapter?`<div class="eyebrow">${n.chapter}</div>`:''}
     <h1 class="q">${n.title}</h1>
     ${n.sub?`<p class="sub">${n.sub}</p>`:''}
+    ${infoPill}
     <div class="choices">${choices}</div>
-    ${n.caption?`<div class="choices-note">${n.caption}${n.captionMore?`<details><summary>Learn more</summary>${n.captionMore}</details>`:''}</div>`:''}
     <div class="backrow"><button class="back" ${history.length?'':'hidden'} onclick="back()">${ICONS.back} Back a step</button></div>`;
   sceneEl.appendChild(el);
 }
@@ -1001,6 +1031,31 @@ function updateTrail(){
   dots += `<span class="seg">${curLink}<span class="node ${isResult?'':'current'} ${perm?'p2':''}" title="you are here"></span></span>`;
   trailEl.innerHTML = `<span class="trail-label ${perm?'p2':''}">${label}</span><div class="dots-row">${dots}</div>`;
 }
+
+/* orientation popover: open/close + dismiss on outside-click or Escape */
+function toggleInfoPop(btn){
+  const pop = document.getElementById('qInfoPop');
+  if(!pop) return;
+  const open = pop.hasAttribute('hidden');
+  if(open){ pop.removeAttribute('hidden'); } else { pop.setAttribute('hidden',''); }
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+document.addEventListener('click', e=>{
+  const pop = document.getElementById('qInfoPop');
+  if(pop && !pop.hasAttribute('hidden') && !e.target.closest('.q-info-wrap')){
+    pop.setAttribute('hidden','');
+    const pill = document.querySelector('.q-info-pill'); if(pill) pill.setAttribute('aria-expanded','false');
+  }
+});
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){
+    const p=document.getElementById('qInfoPop');
+    if(p && !p.hasAttribute('hidden')){
+      p.setAttribute('hidden','');
+      const pill=document.querySelector('.q-info-pill'); if(pill) pill.setAttribute('aria-expanded','false');
+    }
+  }
+});
 
 /* boot */
 render('intro');
