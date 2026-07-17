@@ -130,7 +130,7 @@
     font-size:.72rem;font-weight:800;font-style:italic;line-height:1;
   }
   .q-info-pop{
-    position:absolute;top:calc(100% + 8px);left:0;z-index:40;
+    position:absolute;bottom:calc(100% + 8px);left:0;z-index:40;
     width:min(420px,calc(100vw - 48px));
     background:var(--card);border:1px solid var(--line);border-radius:14px;
     box-shadow:0 18px 40px -12px rgba(20,40,70,.28);
@@ -839,8 +839,8 @@ function renderQuestion(id,n){
     ${n.chapter?`<div class="eyebrow">${n.chapter}</div>`:''}
     <h1 class="q">${n.title}</h1>
     ${n.sub?`<p class="sub">${n.sub}</p>`:''}
-    ${infoPill}
     <div class="choices">${choices}</div>
+    ${infoPill}
     <div class="backrow"><button class="back" ${history.length?'':'hidden'} onclick="back()">${ICONS.back} Back a step</button></div>`;
   sceneEl.appendChild(el);
 }
