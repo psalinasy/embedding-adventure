@@ -233,6 +233,10 @@
   }
   .note .ic{flex:none;margin-top:1px}
   .note b{color:var(--ink);font-family:var(--font-body);font-weight:900}
+  /* amber warning variant for deprecation-style gotchas */
+  .note.gotcha{background:#FDF6EC;border-color:#F0DDBB;color:#6B5326}
+  .note.gotcha .ic{stroke:#C9871B}
+  .note.gotcha b{color:#8A5A12}
   .doc-link.on-fill{
     color:#fff;margin-left:0;margin-top:20px;
   }
@@ -520,7 +524,8 @@ const ICONS = {
   bulb:'<svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D7CC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.1 14a5 5 0 1 0-6.2 0c.5.4 1.1 1.2 1.1 2h4c0-.8.6-1.6 1.1-2Z"/></svg>',
   chev:'<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>',
   seats:'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#2D7CC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
-  doc:'<svg width="17" height="17" viewBox="0 0 443 443" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M55.375 62.2969C43.9066 62.2969 34.6094 71.5941 34.6094 83.0625V332.25C34.6094 343.718 43.9066 353.016 55.375 353.016H143.187C152.366 353.016 161.17 356.662 167.66 363.152L206.813 402.308C210.707 406.203 215.989 408.391 221.496 408.391C227.004 408.391 232.285 406.203 236.18 402.308L275.339 363.152C281.831 356.662 290.633 353.016 299.811 353.016H387.625C399.093 353.016 408.391 343.718 408.391 332.25V83.0625C408.391 71.5941 399.093 62.2969 387.625 62.2969H299.811C279.619 62.2969 260.252 70.3182 245.973 84.5964L221.498 109.07L197.028 84.5994C182.749 70.3193 163.381 62.2969 143.187 62.2969H55.375ZM76.1406 311.484V103.828H143.187C152.366 103.828 161.17 107.475 167.66 113.966L200.734 147.042V337.494L197.028 333.787C182.749 319.508 163.381 311.484 143.187 311.484H76.1406ZM242.266 337.491L245.973 333.784C260.252 319.505 279.619 311.484 299.811 311.484H366.859V103.828H299.811C290.633 103.828 281.831 107.474 275.339 113.964L242.266 147.036V337.491Z" fill="currentColor"/></svg>'
+  doc:'<svg width="17" height="17" viewBox="0 0 443 443" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M55.375 62.2969C43.9066 62.2969 34.6094 71.5941 34.6094 83.0625V332.25C34.6094 343.718 43.9066 353.016 55.375 353.016H143.187C152.366 353.016 161.17 356.662 167.66 363.152L206.813 402.308C210.707 406.203 215.989 408.391 221.496 408.391C227.004 408.391 232.285 406.203 236.18 402.308L275.339 363.152C281.831 356.662 290.633 353.016 299.811 353.016H387.625C399.093 353.016 408.391 343.718 408.391 332.25V83.0625C408.391 71.5941 399.093 62.2969 387.625 62.2969H299.811C279.619 62.2969 260.252 70.3182 245.973 84.5964L221.498 109.07L197.028 84.5994C182.749 70.3193 163.381 62.2969 143.187 62.2969H55.375ZM76.1406 311.484V103.828H143.187C152.366 103.828 161.17 107.475 167.66 113.966L200.734 147.042V337.494L197.028 333.787C182.749 319.508 163.381 311.484 143.187 311.484H76.1406ZM242.266 337.491L245.973 333.784C260.252 319.505 279.619 311.484 299.811 311.484H366.859V103.828H299.811C290.633 103.828 281.831 107.474 275.339 113.964L242.266 147.036V337.491Z" fill="currentColor"/></svg>',
+  warn:'<svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9871B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>'
 };
 
 /* ---- permissions journey (part 2) data, keyed by embedding model + data layout ---- */
@@ -542,7 +547,7 @@ const PERM = {
         "If all customers share the same table structure, programmatically duplicate dashboards using <b>Serialization</b>.",
         "If their structures differ, this approach runs out of road."
       ],
-      note:"The <b>Locked parameter is not a paid feature</b> — handy if you fall back to commingled tables."
+      note:"<b>The gotcha:</b> every tenant ends up with its own version of each dashboard and question, so you'll need to keep every change in sync across all of them via a <b>Git workflow</b>."
     }
   },
   rls:{
@@ -578,7 +583,7 @@ const SEATS = {
 
 /* ---- direct documentation per embedding type ---- */
 const DOCS = {
-  "Modular Embedding Guest":"https://www.metabase.com/docs/latest/embedding/guest-embedding",
+  "Modular Guest Embedding":"https://www.metabase.com/docs/latest/embedding/guest-embedding",
   "Modular Embedding SSO":"https://www.metabase.com/docs/latest/embedding/modular-embedding",
   "Modular Embedding SDK":"https://www.metabase.com/docs/latest/embedding/sdk/introduction",
   "Full app embedding":"https://www.metabase.com/docs/latest/embedding/full-app-embedding"
@@ -594,7 +599,7 @@ const PERM_DOCS = {
 
 /* ---- live interactive demo per embedding type ---- */
 const DEMOS = {
-  "Modular Embedding Guest":"https://appytown.metabase.com/",
+  "Modular Guest Embedding":"https://appytown.metabase.com/",
   "Modular Embedding SSO":"https://people-analytics-embedded-demo.vercel.app/",
   "Modular Embedding SDK":"https://embedded-analytics-sdk-demo.metabase.com/admin/products",
   "Full app embedding":"https://embedding-demo.metabase.com/"
@@ -662,7 +667,7 @@ const NODES = {
 
   /* ================= RESULTS ================= */
   r_guest:{
-    type:'result', verdict:"Modular Embedding Guest", seats:'none',
+    type:'result', verdict:"Modular Guest Embedding", seats:'none',
     tagline:"Embed view-and-filter dashboards in an iframe without creating viewer accounts.",
     why:[
       "Customers only need dashboards and filters; they do not need drill-through or report creation.",
@@ -703,6 +708,7 @@ const NODES = {
       "An iframe meets your integration needs, so a custom React implementation is unnecessary."
     ],
     note:"Full app embedding exposes more of Metabase than modular embedding. Review navigation, permissions, and feature visibility before launch.",
+    gotcha:"Full app embedding is no longer being actively developed — new features are going into <b>Modular Embedding</b> instead. Prefer modular embedding unless you truly need the entire Metabase app.",
     arch:'rls'
   },
   r_sdk_create:{
@@ -863,6 +869,7 @@ function renderResult(id,n){
         <div class="phead">Why we recommend it</div>
         <ul class="why">${why}</ul>
         <div class="note">${ICONS.bulb}<div><b>Implementation note:</b> ${n.note}</div></div>
+        ${n.gotcha?`<div class="note gotcha">${ICONS.warn}<div><b>Gotcha:</b> ${n.gotcha}</div></div>`:''}
       </div>
     </div>
 
